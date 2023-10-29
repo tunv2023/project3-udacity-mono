@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reverseproxy
   labels:
     app: reverseproxy
+  name: reverseproxy
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: reverseproxy
@@ -15,12 +15,22 @@ spec:
         app: reverseproxy
     spec:
       containers:
-      - name: reverseproxy
-        image: tunv1712/reverseproxy:v2
-        ports:
-        - containerPort: 8080
-        resources:
-          limits:
-            cpu: 1000m
-          requests:
-            cpu: 500m
+        - image: tunv1712/reverseproxy:v1
+          name: reverseproxy
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "1000Mi"
+              cpu: "250m"
+            limits:
+              memory: "2000Mi"
+              cpu: "500m"
+          envFrom:
+            - secretRef:
+                name: env-secret
+            - configMapRef:
+                name: env-config
+            - secretRef:
+                name: aws-secret
+          ports:
+            - containerPort: 8080

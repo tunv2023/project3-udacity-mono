@@ -16,7 +16,7 @@ spec:
     spec: 
       containers: 
         - name: api-user
-          image: tunv1712/udagram-api-user:v2
+          image: tunv1712/udagram-api-user:v1
           imagePullPolicy: Always
           resources:
             requests:            
