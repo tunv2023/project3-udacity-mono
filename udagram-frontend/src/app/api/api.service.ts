@@ -62,10 +62,9 @@ export class ApiService {
                                   {
                                     headers: headers,
                                     reportProgress: true, // track progress
-                                  });
-
+                                  });        
     return new Promise ( resolve => {
-        this.http.request(req).subscribe((resp) => {
+        this.http.request(req).subscribe((resp) => {        
         if (resp && (<any> resp).status && (<any> resp).status === 200) {
           resolve(this.post(endpoint, payload));
         }
