@@ -1,21 +1,30 @@
 language: node_js
-node_js:
-  - 16
+
+node_js: 
+  - 13
 
 services:
   - docker
 
 script:
-  - docker --version # print the version for loggingg
-  - docker-compose -f docker-compose-build.yaml build --parallel
-  - docker tag reverseproxy tunv1712/reverseproxy:v2
-  - docker tag udagram-api-feed tunv1712/api-feed:v2
-  - docker tag udagram-api-user tunv1712/api-user:v2
-  - docker tag udagram-frontend tunv1712/front-end:v2
+  
+  # Build
+  - docker build -t udagram-api-feed:v2 ./udagram-api-feed
+  - docker build -t udagram-api-user:v2 ./udagram-api-user
+  - docker build -t udagram-frontend:v2 ./udagram-frontend
+  - docker build -t reverseproxy:v2 ./udagram-reverseproxy  
 
+  # Tagging
+  - docker tag udagram-api-feed:v2 tunv1712/udagram-api-feed:v2
+  - docker tag udagram-api-user:v2 tunv1712/udagram-api-user:v2
+  - docker tag udagram-frontend:v2 tunv1712/udagram-frontend:v2
 after_success:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  # Assuming DOCKER_PASSWORD and DOCKER_USERNAME are set in the Travis repository settings
+  # Login Docker  
+
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  # Pushing 
+  - docker push tunv1712/udagram-api-feed:v2
+  - docker push tunv1712/udagram-api-user:v2
+  - docker push tunv1712/udagram-frontend:v2
   - docker push tunv1712/reverseproxy:v2
-  - docker push tunv1712/api-user:v2
-  - docker push tunv1712/api-feed:v2
-  - docker push tunv1712/front-end:v2
