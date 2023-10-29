@@ -6,7 +6,7 @@ services:
   - docker
 
 script:
-  - docker --version # print the version for logging
+  - docker --version # print the version for loggingg
   - docker-compose -f docker-compose-build.yaml build --parallel
   - docker tag reverseproxy tunv1712/reverseproxy:latest
   - docker tag udagram-api-feed tunv1712/api-feed:latest
