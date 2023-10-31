@@ -7,6 +7,7 @@ data:
   POSTGRES_DB: udacityprj3
   POSTGRES_HOST: aws-dev-udacity-prj3.cmi5or8igbuq.us-east-1.rds.amazonaws.com
   URL: http://localhost:8100
+  JWT_SECRET: testing
 metadata:
   name: env-config
 

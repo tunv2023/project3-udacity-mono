@@ -1,0 +1,132 @@
+Name:              api-feed
+Namespace:         default
+Labels:            service=api-feed
+Annotations:       <none>
+Selector:          service=api-feed
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                172.20.47.31
+IPs:               172.20.47.31
+Port:              8080  8080/TCP
+TargetPort:        8080/TCP
+Endpoints:         10.0.0.78:8080,10.0.1.178:8080
+Session Affinity:  None
+Events:            <none>
+
+
+Name:              api-user
+Namespace:         default
+Labels:            service=api-user
+Annotations:       <none>
+Selector:          service=api-user
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                172.20.45.9
+IPs:               172.20.45.9
+Port:              8080  8080/TCP
+TargetPort:        8080/TCP
+Endpoints:         10.0.0.225:8080,10.0.1.169:8080
+Session Affinity:  None
+Events:            <none>
+
+
+Name:              frontend
+Namespace:         default
+Labels:            <none>
+Annotations:       <none>
+Selector:          app=frontend
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                172.20.6.28
+IPs:               172.20.6.28
+Port:              http  80/TCP
+TargetPort:        80/TCP
+Endpoints:         10.0.0.242:80,10.0.1.80:80
+Session Affinity:  None
+Events:            <none>
+
+
+Name:              kubernetes
+Namespace:         default
+Labels:            component=apiserver
+                   provider=kubernetes
+Annotations:       <none>
+Selector:          <none>
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                172.20.0.1
+IPs:               172.20.0.1
+Port:              https  443/TCP
+TargetPort:        443/TCP
+Endpoints:         10.0.0.177:443,10.0.1.254:443
+Session Affinity:  None
+Events:            <none>
+
+
+Name:                     publicfrontend
+Namespace:                default
+Labels:                   app=frontend
+Annotations:              <none>
+Selector:                 app=frontend
+Type:                     LoadBalancer
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       172.20.95.65
+IPs:                      172.20.95.65
+LoadBalancer Ingress:     a71f515adfd4b4510a0bbd5ddad75312-1135718290.us-east-1.elb.amazonaws.com
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  31775/TCP
+Endpoints:                10.0.0.242:80,10.0.1.80:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:
+  Type    Reason                Age   From                Message
+  ----    ------                ----  ----                -------
+  Normal  EnsuringLoadBalancer  55m   service-controller  Ensuring load balancer
+  Normal  EnsuredLoadBalancer   55m   service-controller  Ensured load balancer
+
+
+Name:                     publicreverseproxy
+Namespace:                default
+Labels:                   app=reverseproxy
+Annotations:              <none>
+Selector:                 app=reverseproxy
+Type:                     LoadBalancer
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       172.20.95.109
+IPs:                      172.20.95.109
+LoadBalancer Ingress:     ab0fd976148b0492bb4b94af801663ba-145022168.us-east-1.elb.amazonaws.com
+Port:                     <unset>  8080/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  30611/TCP
+Endpoints:                10.0.0.91:8080
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:
+  Type    Reason                Age   From                Message
+  ----    ------                ----  ----                -------
+  Normal  EnsuringLoadBalancer  55m   service-controller  Ensuring load balancer
+  Normal  EnsuredLoadBalancer   54m   service-controller  Ensured load balancer
+
+
+Name:              reverseproxy
+Namespace:         default
+Labels:            app=reverseproxy
+Annotations:       <none>
+Selector:          app=reverseproxy
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                172.20.41.186
+IPs:               172.20.41.186
+Port:              8080  8080/TCP
+TargetPort:        8080/TCP
+Endpoints:         10.0.0.91:8080
+Session Affinity:  None
+Events:            <none>
