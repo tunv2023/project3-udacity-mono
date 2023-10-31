@@ -16,7 +16,7 @@ spec:
     spec:      
       containers:
       - name: frontend
-        image: tunv1712/udagram-frontend:v1
+        image: tunv1712/udagram-frontend:v3
         imagePullPolicy: Always        
         resources:
           limits:

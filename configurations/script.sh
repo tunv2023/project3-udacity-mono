@@ -27,5 +27,5 @@ kubectl rollout restart deployment/api-feed
 
 kubectl get deployments 
 
-aws eks update-kubeconfig --region us-east-1 --name empl1-cluster
+aws eks update-kubeconfig --region us-east-1 --name tunv1712-cluster
 
